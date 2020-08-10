@@ -1,9 +1,35 @@
 import os
-# import datetime
+from unipath import Path
+import environ
+
+
+__all__ = (
+    "PROJECT_DIR",
+    "BASE_DIR",
+    "ENV",
+)
+
+
+# Read configuration variables from .env file
+ENV = environ.Env()
+environ.Env.read_env(".env")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+PROJECT_DIR = Path(__file__).parent.parent
+BASE_DIR = PROJECT_DIR
+
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR.child("static"),
+]
+STATIC_ROOT = BASE_DIR.child("collectstatic")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -74,11 +100,24 @@ WSGI_APPLICATION = 'drfx.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+'''
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'wbaug_db'),
+        'USER': os.getenv('DB_USER', 'wbaug_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', 5432),
     }
 }
 
