@@ -14,7 +14,7 @@
 import os
 import argparse
 import utils.WBAugmenter_Python.WBAugmenter.WBEmulator as wbAug
-from drfx.settings import BASE_DIR, MEDIA_ROOT
+from drfx.settings import BASE_DIR, MEDIA_ROOT, MEDIA_URL
 
 def parse_args():
     parser = argparse.ArgumentParser(description="WB color augmenter")
@@ -65,4 +65,7 @@ def augment_images(**kwargs):
         os.makedirs(args["out_dir"], exist_ok=True)
         paths = wbColorAug.single_image_processing(args["input_image_filename"], args["out_dir"], args["out_number"],
                                            args["write_original"])
+        print("MEDIA_ROOT", MEDIA_ROOT)
+        print("MEDIA_URL", MEDIA_URL)
+        print(paths)
         return paths

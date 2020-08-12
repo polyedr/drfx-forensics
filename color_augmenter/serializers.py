@@ -4,7 +4,7 @@ from color_augmenter.models import IllustrationSet, Image
 # import sys
 # import subprocess
 
-from drfx.settings import BASE_DIR, MEDIA_ROOT
+from drfx.settings import BASE_DIR, MEDIA_ROOT, MEDIA_URL
 from utils.WBAugmenter_Python.wbAug import parse_args, augment_images
 
 
@@ -41,6 +41,8 @@ class IllustrationSetSerializer(serializers.ModelSerializer):
         )
 
         for i in processed_images_paths:
-            Image.objects.create(image=i, illustration_set=illustration_set)
+            i_media = i.split(MEDIA_ROOT)
+
+            Image.objects.create(image=i_media[1], illustration_set=illustration_set)
 
         return illustration_set
