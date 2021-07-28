@@ -38,7 +38,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 SECRET_KEY = 'qv*o1&&x%#jtsn)5((g+yw#%3_a$ykfof6b-)j^i$1a8se*7c8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'api',
     'users',
     'color_augmenter',
+    'smartcropsize',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -174,5 +176,13 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'AI DESIGN LIBRARIES API',
+    'DESCRIPTION': 'Libraries collection to process images',
+    'VERSION': '1.0.0',
+    # OTHER SETTINGS
 }
