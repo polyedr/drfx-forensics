@@ -40,8 +40,8 @@ urlpatterns = [
     #     include("color_augmenter.urls", namespace="color_augmenters"),
     # ),
     path(
-        "api/v1/smartcrops/",
-        include("smartcropsize.urls", namespace="smartcrops"),
+        "api/v1/forensics/",
+        include("forensics.urls", namespace="forensics"),
     ),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:

@@ -64,8 +64,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'api',
     'users',
-    'color_augmenter',
-    'smartcropsize',
+    'forensics',
     'drf_spectacular',
 ]
 
